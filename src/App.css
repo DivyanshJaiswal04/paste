@@ -1,0 +1,22 @@
+/* App.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%; /* Ensures the background fills the screen */
+  background-color: #000 !important; /* Black background */
+  color: #fff; /* White text */
+  font-family: Arial, sans-serif; /* Set a global font */
+}
+
+* {
+  box-sizing: inherit;
+}
+
+/* App.css */
+#root {
+  height: 100vh; /* Full viewport height */
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
+}
