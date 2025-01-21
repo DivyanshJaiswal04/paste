@@ -24,11 +24,7 @@ const router = createBrowserRouter([
         element: <Paste />,
       },
       {
-        path: "/pastes/:id",
-        element: <Paste />,
-      },
-      {
-        path: "/viewPaste",
+        path: "/viewpaste/:id",
         element: <ViewPaste />,
       },
     ],

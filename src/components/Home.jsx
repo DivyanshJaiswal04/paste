@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToPaste, updateToPaste } from "../features/PasteSlice";
 import { toast } from "react-hot-toast";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
+  const pastes = useSelector((state) => state.paste.paste);
   const [searchParam, setSearchParam] = useSearchParams();
-  const pasteId = searchParam.get("pasteId");
+  const pasteId = searchParam.get("id");
   const dispatch = useDispatch();
 
   // date
@@ -18,6 +19,18 @@ const Home = () => {
   const time = now.toLocaleTimeString(); // e.g., "10:34:23 AM"
   const day = now.toLocaleDateString("en-US", { weekday: "long" });
   const current = date + " " + time + " " + day;
+
+  useEffect(() => {
+    if (pasteId) {
+      const paste = pastes.find((p) => p.id === pasteId);
+      if (paste) {
+        setTitle(paste.title);
+        setValue(paste.value);
+      } else {
+        toast.error("Paste not found");
+      }
+    }
+  }, [pasteId, pastes]);
 
   const createPaste = () => {
     const Paste = {
@@ -36,6 +49,7 @@ const Home = () => {
       }
       dispatch(addToPaste(Paste));
     }
+
     setTitle("");
     setValue("");
     setSearchParam({});
