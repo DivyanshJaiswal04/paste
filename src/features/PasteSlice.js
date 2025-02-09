@@ -7,6 +7,7 @@ const initialState = {
     : [],
 };
 
+
 export const PasteSlice = createSlice({
   name: "paste",
   initialState,
